@@ -15,6 +15,7 @@
 		09419D4D1F612D42005B052E /* BaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09419D4C1F612D42005B052E /* BaseProvider.swift */; };
 		09419D4F1F612D6E005B052E /* FacebookLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09419D4E1F612D6E005B052E /* FacebookLoginProvider.swift */; };
 		09419D511F612E2E005B052E /* GoogleLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09419D501F612E2E005B052E /* GoogleLoginProvider.swift */; };
+		09CDC5ED1F61934100167D10 /* EmailLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CDC5EC1F61934100167D10 /* EmailLoginProvider.swift */; };
 		D09DEEBA91C0C17CEBD566B4 /* Pods_argus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA716B9BCF7C2A47C28A2461 /* Pods_argus.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		09419D4C1F612D42005B052E /* BaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProvider.swift; sourceTree = "<group>"; };
 		09419D4E1F612D6E005B052E /* FacebookLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginProvider.swift; sourceTree = "<group>"; };
 		09419D501F612E2E005B052E /* GoogleLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginProvider.swift; sourceTree = "<group>"; };
+		09CDC5EC1F61934100167D10 /* EmailLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailLoginProvider.swift; sourceTree = "<group>"; };
 		85E0C4A463FFC91B3040561B /* Pods-argus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-argus.release.xcconfig"; path = "Pods/Target Support Files/Pods-argus/Pods-argus.release.xcconfig"; sourceTree = "<group>"; };
 		A5195C99622544D0EA86544A /* Pods-argus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-argus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-argus/Pods-argus.debug.xcconfig"; sourceTree = "<group>"; };
 		EA716B9BCF7C2A47C28A2461 /* Pods_argus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_argus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -84,6 +86,7 @@
 				09419D4C1F612D42005B052E /* BaseProvider.swift */,
 				09419D4E1F612D6E005B052E /* FacebookLoginProvider.swift */,
 				09419D501F612E2E005B052E /* GoogleLoginProvider.swift */,
+				09CDC5EC1F61934100167D10 /* EmailLoginProvider.swift */,
 			);
 			path = LoginProviders;
 			sourceTree = "<group>";
@@ -190,7 +193,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		6E86F1A461DC5FEF6EC704E8 /* [CP] Copy Pods Resources */ = {
@@ -246,6 +249,7 @@
 				09419D3C1F612A63005B052E /* ViewController.swift in Sources */,
 				09419D3A1F612A63005B052E /* AppDelegate.swift in Sources */,
 				09419D4D1F612D42005B052E /* BaseProvider.swift in Sources */,
+				09CDC5ED1F61934100167D10 /* EmailLoginProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
