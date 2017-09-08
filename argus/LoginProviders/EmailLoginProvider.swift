@@ -17,45 +17,106 @@ enum ValidationType {
     case lowerCaseExist
 }
 
-protocol EmailLoginProviderDataSource {
-    func emailTextField() -> UITextField
-    func passwordTextField() -> UITextField
-    func emailFieldValidation() -> [ValidationType]
-    func passwordFieldValidation() -> [ValidationType]
+enum EmailLoginError: Error {
+    case emailInvalid
+    case passwordInvalid
+    case emptyEmail
+    case emptyPassword
 }
 
-class EmailLoginProvider: BaseProvider {
+protocol EmailLoginProviderDataSource {
+    func usernameTextField() -> UITextField
+    func passwordTextField() -> UITextField
+    func usernameFieldValidation() -> [ValidationType]
+    func passwordFieldValidation() -> [ValidationType]
+    func signInButton() -> UIButton
+}
+
+protocol EmailLoginProviderDelegate: class {
+    func usernameValidationError(error: EmailLoginError)
+    func passwordValidationError(error: EmailLoginError)
+    func signIn(username: String, password: String)
+}
+
+class EmailLoginProvider: NSObject, BaseProvider {
     
     var dataSource: EmailLoginProviderDataSource!
-    private var emailTextField: UITextField? {
-        didSet {
-            emailTextField?.keyboardType = .emailAddress
-            emailTextField?.delegate = self
-        }
+    weak var delegate: EmailLoginProviderDelegate?
+    fileprivate var usernameTextField: UITextField {
+        let emailTextField = dataSource.usernameTextField()
+        emailTextField.keyboardType = .emailAddress
+        emailTextField.delegate = self
+        
+        return emailTextField
     }
-    private var passwordTextField: UITextField? {
-        didSet {
-            passwordTextField?.isSecureTextEntry = true
-            passwordTextField?.delegate = self
-        }
+    fileprivate var passwordTextField: UITextField {
+        let passwordTextField = dataSource.passwordTextField()
+        passwordTextField.isSecureTextEntry = true
+        passwordTextField.delegate = self
+        
+        return passwordTextField
+    }
+    private var signInButton: UIButton {
+        let button = dataSource.signInButton()
+        button.addTarget(self, action: #selector(signInButtonTapped), for: .touchUpInside)
+        
+        return button
     }
     
-    private var email: String? {
-        return emailTextField?.text
+    fileprivate var username: String? {
+        return usernameTextField.text
     }
     
-    private var password: String? {
-        return passwordTextField?.text
+    fileprivate var password: String? {
+        return passwordTextField.text
     }
     
     init(dataSource: EmailLoginProviderDataSource) {
         self.dataSource = dataSource
+    }
+    
+    fileprivate func toggleSignInButton(_ enable: Bool) {
         
-        self.emailTextField = dataSource.emailTextField()
-        self.passwordTextField = dataSource.passwordTextField()
+        signInButton.isEnabled = enable
+    }
+    
+    fileprivate func checkIfEmpty(strings: [String?]) -> Bool {
+        return strings.contains(where: { (string) -> Bool in
+            guard let string = string else { return true }
+            return string == ""
+        })
+    }
+    
+    @objc fileprivate func signInButtonTapped() {
+        
     }
 }
 
-extension EmailLoginProvider: UITextViewDelegate {
+extension EmailLoginProvider: UITextFieldDelegate {
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let str = textField.text as NSString? else { return false }
+        let updatedString = str.replacingCharacters(in: range, with: string)
+        
+        switch textField {
+        case usernameTextField:
+            toggleSignInButton(checkIfEmpty(strings: [updatedString, password]))
+        case passwordTextField:
+            toggleSignInButton(checkIfEmpty(strings: [updatedString, username]))
+        default:
+            return false
+        }
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case usernameTextField:
+            passwordTextField.becomeFirstResponder()
+        default:
+            signInButtonTapped()
+        }
+        
+        return true
+    }
 }
