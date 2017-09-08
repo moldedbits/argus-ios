@@ -8,21 +8,7 @@
 
 import Foundation
 import UIKit
-
-enum ValidationType {
-    case email
-    case characterLength(Int)
-    case specialCharacterExist
-    case upperCaseExist
-    case lowerCaseExist
-}
-
-enum EmailLoginError: Error {
-    case emailInvalid
-    case passwordInvalid
-    case emptyEmail
-    case emptyPassword
-}
+import Result
 
 protocol EmailLoginProviderDataSource {
     func usernameTextField() -> UITextField
@@ -32,9 +18,19 @@ protocol EmailLoginProviderDataSource {
     func signInButton() -> UIButton
 }
 
+extension EmailLoginProviderDataSource {
+    func usernameFieldValidation() -> [ValidationType] {
+        return [.characterLength(min: 8, max: 40), .upperCaseExist, .lowerCaseExist, .specialCharacterExist]
+    }
+    
+    func passwordFieldValidation() -> [ValidationType] {
+        return [.email]
+    }
+}
+
 protocol EmailLoginProviderDelegate: class {
-    func usernameValidationError(error: EmailLoginError)
-    func passwordValidationError(error: EmailLoginError)
+    func usernameValidationError(error: ValidationError)
+    func passwordValidationError(error: ValidationError)
     func signIn(username: String, password: String)
 }
 
@@ -88,7 +84,29 @@ class EmailLoginProvider: NSObject, BaseProvider {
     }
     
     @objc fileprivate func signInButtonTapped() {
+        if let _ = validateFields() {
+            return
+        } else {
+            delegate?.signIn(username: username ?? "", password: password ?? "")
+        }
+    }
+    
+    private func validateFields() -> ValidationError? {
+        switch ValidationType.validate(string: username ?? "", validations: dataSource.usernameFieldValidation()) {
+        case let .failure(error):
+            delegate?.usernameValidationError(error: error)
+            return error
+        case .success: break
+        }
         
+        switch ValidationType.validate(string: password ?? "", validations: dataSource.passwordFieldValidation()) {
+        case let .failure(error):
+            delegate?.passwordValidationError(error: error)
+            return error
+        case .success: break
+        }
+        
+        return nil
     }
 }
 

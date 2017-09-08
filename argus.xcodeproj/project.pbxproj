@@ -16,6 +16,8 @@
 		09419D4F1F612D6E005B052E /* FacebookLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09419D4E1F612D6E005B052E /* FacebookLoginProvider.swift */; };
 		09419D511F612E2E005B052E /* GoogleLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09419D501F612E2E005B052E /* GoogleLoginProvider.swift */; };
 		09CDC5ED1F61934100167D10 /* EmailLoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CDC5EC1F61934100167D10 /* EmailLoginProvider.swift */; };
+		09D3E9E91F62A8DB002B767B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D3E9E81F62A8DB002B767B /* String+Extension.swift */; };
+		09D3E9EB1F62BC97002B767B /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D3E9EA1F62BC97002B767B /* Validation.swift */; };
 		D09DEEBA91C0C17CEBD566B4 /* Pods_argus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA716B9BCF7C2A47C28A2461 /* Pods_argus.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +33,8 @@
 		09419D4E1F612D6E005B052E /* FacebookLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookLoginProvider.swift; sourceTree = "<group>"; };
 		09419D501F612E2E005B052E /* GoogleLoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleLoginProvider.swift; sourceTree = "<group>"; };
 		09CDC5EC1F61934100167D10 /* EmailLoginProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailLoginProvider.swift; sourceTree = "<group>"; };
+		09D3E9E81F62A8DB002B767B /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		09D3E9EA1F62BC97002B767B /* Validation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
 		85E0C4A463FFC91B3040561B /* Pods-argus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-argus.release.xcconfig"; path = "Pods/Target Support Files/Pods-argus/Pods-argus.release.xcconfig"; sourceTree = "<group>"; };
 		A5195C99622544D0EA86544A /* Pods-argus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-argus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-argus/Pods-argus.debug.xcconfig"; sourceTree = "<group>"; };
 		EA716B9BCF7C2A47C28A2461 /* Pods_argus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_argus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +91,8 @@
 				09419D4E1F612D6E005B052E /* FacebookLoginProvider.swift */,
 				09419D501F612E2E005B052E /* GoogleLoginProvider.swift */,
 				09CDC5EC1F61934100167D10 /* EmailLoginProvider.swift */,
+				09D3E9E81F62A8DB002B767B /* String+Extension.swift */,
+				09D3E9EA1F62BC97002B767B /* Validation.swift */,
 			);
 			path = LoginProviders;
 			sourceTree = "<group>";
@@ -245,10 +251,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				09419D4F1F612D6E005B052E /* FacebookLoginProvider.swift in Sources */,
+				09D3E9E91F62A8DB002B767B /* String+Extension.swift in Sources */,
 				09419D511F612E2E005B052E /* GoogleLoginProvider.swift in Sources */,
 				09419D3C1F612A63005B052E /* ViewController.swift in Sources */,
 				09419D3A1F612A63005B052E /* AppDelegate.swift in Sources */,
 				09419D4D1F612D42005B052E /* BaseProvider.swift in Sources */,
+				09D3E9EB1F62BC97002B767B /* Validation.swift in Sources */,
 				09CDC5ED1F61934100167D10 /* EmailLoginProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
