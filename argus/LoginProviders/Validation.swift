@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Result
 
 enum ValidationType {
     case email

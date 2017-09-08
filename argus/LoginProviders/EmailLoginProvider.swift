@@ -20,11 +20,11 @@ protocol EmailLoginProviderDataSource {
 
 extension EmailLoginProviderDataSource {
     func usernameFieldValidation() -> [ValidationType] {
-        return [.characterLength(min: 8, max: 40), .upperCaseExist, .lowerCaseExist, .specialCharacterExist]
+        return [.email]
     }
     
     func passwordFieldValidation() -> [ValidationType] {
-        return [.email]
+        return [.characterLength(min: 8, max: 40), .upperCaseExist, .lowerCaseExist, .specialCharacterExist]
     }
 }
 
