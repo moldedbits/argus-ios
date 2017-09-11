@@ -9,6 +9,15 @@
 import UIKit
 import FacebookCore
 import FacebookLogin
+import Result
+
+protocol FaceBookLoginProviderDataSource {
+    func displayLoginButton() -> UIView
+}
+
+protocol FaceBookLoginProviderDelegate: class {
+    func signInError(error: LoginError)
+}
 
 class FacebookLoginProvider: BaseProvider {
     
