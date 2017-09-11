@@ -82,3 +82,11 @@ enum ValidationError: Error {
     case invalidRegex
     case unknown(String)
 }
+
+enum LoginError: Error {
+    case accessToken
+    case connectionLost
+    case declinedPermissions
+    case profileError
+    case graphConnectionError
+}
