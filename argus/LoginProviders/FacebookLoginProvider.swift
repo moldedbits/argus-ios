@@ -17,12 +17,13 @@ protocol FaceBookLoginProviderDataSource {
 
 protocol FaceBookLoginProviderDelegate: class {
     func signInError(error: LoginError)
+    func graphConnectionError(error: LoginError)
 }
 
 struct MyProfileRequest: GraphRequestProtocol {
     struct Response: GraphResponseProtocol {
         init(rawResponse: Any?) {
-            // Decode JSON from rawResponse into other properties here.
+            // TODO: Decode JSON from rawResponse into other properties here.
         }
     }
     
@@ -41,10 +42,16 @@ enum ProfileKeys: String {
 
 class FacebookLoginProvider: BaseProvider {
     
+    var dataSource: FaceBookLoginProviderDataSource!
+    weak var delegate: FaceBookLoginProviderDelegate?
     var permissions: [ReadPermission] = [ .publicProfile ]
     var userName: String?
     var userId: String?
     var registeredEmail: String?
+    
+    init(dataSource: FaceBookLoginProviderDataSource) {
+        self.dataSource = dataSource
+    }
     
     // MARK: creates and returns login button
     private func displayLoginButton(readPermissions: [ReadPermission] = [ .publicProfile ]) -> UIView {
@@ -64,16 +71,16 @@ class FacebookLoginProvider: BaseProvider {
     }
     
     // Once the button is clicked, show the login dialog
-    @objc func loginButtonClicked() {
+    @objc fileprivate func loginButtonClicked() {
         let loginManager = LoginManager()
         loginManager.logIn(self.permissions) { loginResult in
             switch loginResult {
             case .failed(let error):
-                // TODO: wrap this response in Result<T> class
                 print(error)
+                self.delegate?.signInError(error: LoginError.loginFailure)
             case .cancelled:
-                // TODO: wrap this response in Result<T> class
                 print("User cancelled login.")
+                self.delegate?.signInError(error: LoginError.userCancelled)
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
                 // TODO: wrap this response in Result<T> class
                 print("Logged in!")
@@ -124,8 +131,8 @@ class FacebookLoginProvider: BaseProvider {
                 // TODO: wrap this response in custom result
                 break
             case .failed(let error):
-                // TODO: wrap this in custom Error class
                 print("Custom Graph Request Failed: \(error)")
+                self.delegate?.graphConnectionError(error: LoginError.graphConnectionError)
             }
         }
         

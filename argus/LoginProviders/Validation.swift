@@ -84,9 +84,8 @@ enum ValidationError: Error {
 }
 
 enum LoginError: Error {
-    case accessToken
+    case userCancelled
+    case loginFailure
     case connectionLost
-    case declinedPermissions
-    case profileError
     case graphConnectionError
 }
