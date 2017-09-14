@@ -8,6 +8,7 @@ target ‘argus’ do
 # Pods for argus
     pod 'FacebookCore'
     pod 'FacebookLogin'
+    pod 'Google/SignIn'
     pod 'Result', '~> 3.0.0'
     
 end
